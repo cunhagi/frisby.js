@@ -1,0 +1,11 @@
+{
+    "name": "rest_test",
+    "author": "Leonardo Galani",
+    "main": "meu_projeto_de_teste_spec.js",
+    "version": "0.0.1",
+    "dependencies": {
+        "frisby": "latest",
+        "jasmine-node": "latest",
+        "jest": "latest"
+    }
+}

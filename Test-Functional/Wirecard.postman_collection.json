@@ -1,0 +1,1570 @@
+{
+	"info": {
+		"_postman_id": "07e77810-186e-4b6f-ac45-9a1e04919dbe",
+		"name": "Wirecard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Cadastrar Cliente - Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33537930-c293-4ccf-b7da-f93ed65f4ffc",
+								"exec": [
+									"pm.test(\"Cliente cadastrado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ownId\": \"customer_id_500\",\n  \"fullname\": \"Fatima Mendes\",\n  \"email\": \"maria@email.com\",\n  \"birthDate\": \"1985-10-11\",\n  \"taxDocument\": {\n    \"type\": \"CPF\",\n    \"number\": \"22288866644\"\n  },\n  \"phone\": {\n    \"countryCode\": \"55\",\n    \"areaCode\": \"11\",\n    \"number\": \"55552266\"\n  },\n  \"shippingAddress\": {\n    \"city\": \"São Paulo\",\n    \"complement\": \"10\",\n    \"district\": \"Itaim Bibi\",\n    \"street\": \"Avenida Faria Lima\",\n    \"streetNumber\": \"500\",\n    \"zipCode\": \"01234000\",\n    \"state\": \"SP\",\n    \"country\": \"BRA\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/customers/",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Cliente - Data Nascimento Inválida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c043ed1b-da52-4b4d-9792-6de7139d424c",
+								"exec": [
+									"pm.test(\"Cliente não cadastrado. A data de nascimento informada é inválida.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ownId\": \"customer_id_003\",\n  \"fullname\": \"Olívia Medeiros\",\n  \"email\": \"olivia@email.com\",\n  \"birthDate\": \"1980-5\",\n  \"taxDocument\": {\n    \"type\": \"CPF\",\n    \"number\": \"22288866644\"\n  },\n  \"phone\": {\n    \"countryCode\": \"55\",\n    \"areaCode\": \"11\",\n    \"number\": \"55552266\"\n  },\n  \"shippingAddress\": {\n    \"city\": \"São Paulo\",\n    \"complement\": \"10\",\n    \"district\": \"Itaim Bibi\",\n    \"street\": \"Avenida Faria Lima\",\n    \"streetNumber\": \"500\",\n    \"zipCode\": \"01234000\",\n    \"state\": \"SP\",\n    \"country\": \"BRA\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/customers/",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Cliente - Já Existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "72e5230e-8f3a-4c05-abf2-563847a7ae85",
+								"exec": [
+									"pm.test(\"Cliente não cadastrado. O identificador próprio deve ser único, já existe um customer com o identificador informado.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ownId\": \"customer_id_001\",\n  \"fullname\": \"Laura Cavalcante\",\n  \"email\": \"laura@email.com\",\n  \"birthDate\": \"1990-10-22\",\n  \"taxDocument\": {\n    \"type\": \"CPF\",\n    \"number\": \"22288866644\"\n  },\n  \"phone\": {\n    \"countryCode\": \"55\",\n    \"areaCode\": \"11\",\n    \"number\": \"55552266\"\n  },\n  \"shippingAddress\": {\n    \"city\": \"São Paulo\",\n    \"complement\": \"10\",\n    \"district\": \"Itaim Bibi\",\n    \"street\": \"Avenida Faria Lima\",\n    \"streetNumber\": \"500\",\n    \"zipCode\": \"01234000\",\n    \"state\": \"SP\",\n    \"country\": \"BRA\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/customers/",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Cliente - Com Cartão de Crédito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "69a3cc47-5e87-4bc8-9a6b-e7eea18c6ea1",
+								"exec": [
+									"pm.test(\"Cliente listado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"",
+									"tests[\"Cliente com cartão de crédito disponível.\"]= responseBody.has(\"CREDIT_CARD\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/customers/CUS-JS5J5FI4KFUY",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"customers",
+								"CUS-JS5J5FI4KFUY"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Todos os Clientes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "000196c8-db16-49fd-abfc-8e411990f91b",
+								"exec": [
+									"pm.test(\"Clientes listados com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/customers",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Cliente - ID Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "92e189b5-996f-4200-8bda-6b31921f64f9",
+								"exec": [
+									"pm.test(\"Cliente não encontrado. O identificador próprio deve ser válido, não existe um customer com o identificador informado.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/customers/CUS-EU5K0ADXR111",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"customers",
+								"CUS-EU5K0ADXR111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Cartão Crédito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Cartão de crédito adicionado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"method\": \"CREDIT_CARD\",\n  \"creditCard\": {\n    \"expirationMonth\": \"05\",\n    \"expirationYear\": \"22\",\n    \"number\": \"4012001037141112\",\n    \"cvc\": \"123\",\n    \"holder\": {\n      \"fullname\": \"Laura Cavalcante\",\n      \"birthdate\": \"1990-10-22\",\n      \"taxDocument\": {\n        \"type\": \"CPF\",\n        \"number\": \"22288866644\"\n      },\n      \"phone\": {\n        \"countryCode\": \"55\",\n        \"areaCode\": \"11\",\n        \"number\": \"55552266\"\n      }\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/customers/CUS-KUKU9UYDQGAR/fundinginstruments",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"customers",
+								"CUS-KUKU9UYDQGAR",
+								"fundinginstruments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cartão Crédito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Cartão de crédito removido com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/fundinginstruments/CRC-CFKB4WRKR0Z6",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"fundinginstruments",
+								"CRC-CFKB4WRKR0Z6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "09b3bbc3-caba-44ae-8924-52d30e1fda4d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "201bcc17-d9af-4f2d-9a0a-6d0ce7d5792f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Realizar Pedido - Cliente Novo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pedido de cliente novo realizado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ownId\": \"order_id_100\",\n  \"amount\": {\n    \"currency\": \"BRL\",\n    \"subtotals\": {\n      \"shipping\": 1500\n    }\n  },\n  \"items\": [\n    {\n      \"product\": \"Câmera fotográfica\",\n      \"category\": \"CAMERAS\",\n      \"quantity\": 1,\n      \"detail\": \"Câmera fotográfica, modelo CM54296, cor preta\",\n      \"price\": 100000\n    }\n  ],\n  \"customer\": {\n    \"ownId\": \"customer_id_003\",\n    \"fullname\": \"Marcos Monteiro\",\n    \"email\": \"marcos@email.com\",\n    \"birthDate\": \"1980-01-07\",\n    \"taxDocument\": {\n      \"type\": \"CPF\",\n      \"number\": \"57390209674\"\n    },\n    \"phone\": {\n      \"countryCode\": \"55\",\n      \"areaCode\": \"11\",\n      \"number\": \"88763546\"\n    },\n    \"shippingAddress\": {\n      \"street\": \"Avenida 23 de Maio\",\n      \"streetNumber\": 654,\n      \"complement\": 12,\n      \"district\": \"Centro\",\n      \"city\": \"Sao Paulo\",\n      \"state\": \"SP\",\n      \"country\": \"BRA\",\n      \"zipCode\": \"01244500\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Pedido - Cliente Já Cadastrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pedido de cliente já cadastrado realizado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"ownId\":\"order_id_011\",\n   \"amount\":{  \n      \"currency\":\"BRL\",\n      \"subtotals\":{  \n         \"shipping\":2050\n      }\n   },\n   \"items\":[  \n      {  \n         \"product\":\"Descrição do pedido\",\n         \"category\":\"CLOTHING\",\n         \"quantity\":1,\n         \"detail\":\"Blusa Básica\",\n         \"price\":5000\n      }\n   ],\n   \"customer\":{  \n      \"id\":\"CUS-5X3FO74LPSXQ\"\n   }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Pedido - Cliente ID inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pedido não realizado. O identificador próprio deve ser válido, não existe um customer com o identificador informado.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"ownId\":\"order_id_011\",\n   \"amount\":{  \n      \"currency\":\"BRL\",\n      \"subtotals\":{  \n         \"shipping\":2050\n      }\n   },\n   \"items\":[  \n      {  \n         \"product\":\"Descrição do pedido\",\n         \"category\":\"CLOTHING\",\n         \"quantity\":1,\n         \"detail\":\"Blusa Básica\",\n         \"price\":5000\n      }\n   ],\n   \"customer\":{  \n      \"id\":\"CUS-5X3FO74LPSXQ111\"\n   }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Pedido - Checkout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pedido realizado com sucesso via checkout.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"ownId\":\"order_id_009\",\n   \"amount\":{  \n      \"currency\":\"BRL\",\n      \"subtotals\":{  \n         \"shipping\":1000\n      }\n   },\n   \"items\":[  \n      {  \n         \"product\":\"Nome do produto\",\n         \"category\":\"APPAREL_AND_ACCESSORIES\",\n         \"subcategory\":\"CLOTHING\",\n         \"quantity\":1,\n         \"detail\":\"Camiseta estampada\",\n         \"price\":7000\n      }\n   ],\n   \"customer\":{  \n      \"id\":\"CUS-XADQFL9A2UBU\"\n   },\n   \"checkoutPreferences\":{  \n      \"redirectUrls\":{  \n         \"urlSuccess\": \"http://www.lojaexemplo.com.br/compraFeita\",\n         \"urlFailure\": \"http://www.lojaexemplo.com.br/error\"\n      },\n      \"installments\":[  \n         {  \n            \"quantity\":[2,2],\n            \"addition\":1000\n         }\n      ]\n   }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Todos os Pedidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pedidos listados com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD-Z2G4424ZYCP5",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD-Z2G4424ZYCP5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Pedido - Order ID Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pedidos listados com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD-Z2G4424ZYCP5",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD-Z2G4424ZYCP5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Pedido - Order ID Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pedido não encontrado. O número do pedido deve ser válido, não existe um pedido com o identificador informado.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagamentos",
+			"item": [
+				{
+					"name": "Realizar Pagamento -  Cartão de Crédito Criptografado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento via cartão de crédito autorizado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"installmentCount\": 1,\n  \"statementDescriptor\": \"minhaLoja.com\",\n  \"fundingInstrument\": {\n    \"method\": \"CREDIT_CARD\",\n    \"creditCard\": {\n      \"hash\": \"rTcjDNrs0qNSxj3F3nWIp68XxSQtAbB0glWAOLH7kZIt2qottYRCnBpu9SMMQQ4hEkIxOcDZxInTe20n60+PKcmM0zy5e388yxcf82MXtW/ZFMPe0sNPUoEB+3lIZ981Ym7IMud0rmTnsW1Lr2WT0sNTdn9/kuHK5/9asegAXDhMvxInUcuyYkjjsNKCBV6wD8VZFDsG8SCzlOrrrpWM3i5U7qY82z1zalg13QGT3GXyBRA4tKF4j+vSSR21XTRGC0UQoUHhDBfdxG3FjgbNNP/XsM9BfcwDw9AS3DklLB7+8HqELy7+McmZoNWlUxnkt2Akejg7+er3ulBQ7b3z0w==\",\n      \"store\": true,\n      \"holder\": {\n        \"fullname\": \"Jose Portador da Silva\",\n        \"birthdate\": \"1988-12-30\",\n        \"taxDocument\": {\n          \"type\": \"CPF\",\n          \"number\": \"33333333333\"\n        },\n        \"phone\": {\n          \"countryCode\": \"55\",\n          \"areaCode\": \"11\",\n          \"number\": \"66778899\"\n        }\n      }\n    }\n  },\n  \"device\": {\n    \"ip\": \"127.0.0.1\",\n    \"geolocation\": {\n      \"latitude\": -33.867,\n      \"longitude\": 151.206\n    },\n    \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36\",\n    \"fingerprint\": \"QAZXswedCVGrtgBNHyujMKIkolpQAZXswedCVGrtgBNHyujMKIkolpQAZXswedCVGrtgBNHyujMKIkolpQAZXswedCVGrtgBNHyujMKIkolp\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD-V4RQSKTG2I7H/payments",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD-V4RQSKTG2I7H",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Pagamento - Cartão de Crédito Pré-Autorizado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento via cartão de crédito pré-autorizado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"installmentCount\":3,\n   \"delayCapture\":true,\n   \"statementDescriptor\":\"Minha Loja\",\n   \"fundingInstrument\":{  \n      \"method\":\"CREDIT_CARD\",\n      \"creditCard\":{  \n \"hash\": \"rTcjDNrs0qNSxj3F3nWIp68XxSQtAbB0glWAOLH7kZIt2qottYRCnBpu9SMMQQ4hEkIxOcDZxInTe20n60+PKcmM0zy5e388yxcf82MXtW/ZFMPe0sNPUoEB+3lIZ981Ym7IMud0rmTnsW1Lr2WT0sNTdn9/kuHK5/9asegAXDhMvxInUcuyYkjjsNKCBV6wD8VZFDsG8SCzlOrrrpWM3i5U7qY82z1zalg13QGT3GXyBRA4tKF4j+vSSR21XTRGC0UQoUHhDBfdxG3FjgbNNP/XsM9BfcwDw9AS3DklLB7+8HqELy7+McmZoNWlUxnkt2Akejg7+er3ulBQ7b3z0w==\",\n         \"store\":true,\n         \"holder\":{  \n            \"fullname\":\"Roberto Oliveira\",\n            \"birthdate\":\"1988-12-30\",\n            \"taxDocument\":{  \n               \"type\":\"CPF\",\n               \"number\":\"78994193600\"\n            },\n            \"phone\":{  \n               \"countryCode\":\"55\",\n               \"areaCode\":\"11\",\n               \"number\":\"22849560\"\n            },\n            \"billingAddress\":{  \n               \"city\":\"Belo Horizonte\",\n               \"district\":\"Savassi\",\n               \"street\":\"Avenida Contorno\",\n               \"streetNumber\":\"400\",\n               \"zipCode\":\"76932800\",\n               \"state\":\"MG\",\n               \"country\":\"BRA\"\n            }\n         }\n      }\n   }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD-U5MWXQYFFAUI/payments",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD-U5MWXQYFFAUI",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Pagamento - Débito On-line",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento via débito on-line realizado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"fundingInstrument\":{  \n      \"method\":\"ONLINE_BANK_DEBIT\",\n      \"onlineBankDebit\":{  \n         \"bankNumber\":341,\n         \"expirationDate\":\"2019-02-22\"\n      }\n   }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD-VU44DV052PV6/payments",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD-VU44DV052PV6",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Pagamento - Boleto Bancário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento via boleto bancário aguardando confirmação.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"statementDescriptor\":\"Minha Loja\",\n   \"fundingInstrument\":{  \n      \"method\":\"BOLETO\",\n      \"boleto\":{  \n         \"expirationDate\":\"2020-06-20\",\n         \"instructionLines\":{  \n            \"first\":\"Atenção,\",\n            \"second\":\"fique atento à data de vencimento do boleto.\",\n            \"third\":\"Pague em qualquer casa lotérica.\"\n         },\n         \"logoUri\":\"http://www.lojaexemplo.com.br/logo.jpg\"\n      }\n   }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD-L65KUWAJ4I6Y/payments",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD-L65KUWAJ4I6Y",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar Pagamento - Pedido Já Pago",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento não realizado. O pedido já foi pago.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"statementDescriptor\":\"Minha Loja\",\n   \"fundingInstrument\":{  \n      \"method\":\"BOLETO\",\n      \"boleto\":{  \n         \"expirationDate\":\"2020-06-20\",\n         \"instructionLines\":{  \n            \"first\":\"Atenção,\",\n            \"second\":\"fique atento à data de vencimento do boleto.\",\n            \"third\":\"Pague em qualquer casa lotérica.\"\n         },\n         \"logoUri\":\"http://www.lojaexemplo.com.br/logo.jpg\"\n      }\n   }\n}"
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/orders/ORD-QIWFNVEB7T37/payments",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"orders",
+								"ORD-QIWFNVEB7T37",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Capturar Pagamento - Pré-Autorizado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento via cartão de crédito pré-autorizado capturado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/payments/PAY-42ZPHWHJT8D4/capture",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"payments",
+								"PAY-42ZPHWHJT8D4",
+								"capture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Pagamento - Pré-Autorizado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento cancelado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/payments/PAY-6CG1UVJ6DOWC/void",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"payments",
+								"PAY-6CG1UVJ6DOWC",
+								"void"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Todos os Pagamentos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamentos listados com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/payments",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Pagamento - Pagamento ID Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f3d6ee7-dc0d-4125-b4ff-fe046d774487",
+								"exec": [
+									"pm.test(\"Pagamento listado com sucesso.\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UZQ8TKOQZAHNWYBAM4CJYELTQXRRNQ6Q4ZTKUNI5",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "LIAWRTIBIKKWYRRTX6GPIILKFSHBFXEP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://sandbox.moip.com.br/v2/payments/PAY-6CG1UVJ6DOWC",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"moip",
+								"com",
+								"br"
+							],
+							"path": [
+								"v2",
+								"payments",
+								"PAY-6CG1UVJ6DOWC"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
