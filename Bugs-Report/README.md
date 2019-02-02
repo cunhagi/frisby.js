@@ -1,6 +1,6 @@
-# Planejamento
+# Bugs
 
-Criar um plano de estruturação de uma área de qualidade.
+Reportagem de Defeitos encontrados.
 
 ## Iniciando
 
@@ -10,7 +10,7 @@ Essas instruções vão gerar uma cópia funcional do projeto na sua máquina lo
 
 1. Fazer download do arquivo:
 ```
-plano-qa.docx
+Bugs.docx
 ```
 
 ### Iniciando
