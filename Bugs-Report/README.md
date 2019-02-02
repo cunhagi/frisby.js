@@ -1,6 +1,6 @@
-# Reportagem de Defeitos
+# Planejamento
 
-Reportagem de alguns bugs encontrados no sistema.
+Criar um plano de estruturação de uma área de qualidade.
 
 ## Iniciando
 
@@ -10,7 +10,7 @@ Essas instruções vão gerar uma cópia funcional do projeto na sua máquina lo
 
 1. Fazer download do arquivo:
 ```
-Bugs.docx
+plano-qa.docx
 ```
 
 ### Iniciando
